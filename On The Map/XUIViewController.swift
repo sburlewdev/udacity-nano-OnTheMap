@@ -38,9 +38,9 @@ extension UIViewController {
         // Display alert to user with error message.
         return self.alert(withTitle: "Logout Error", message: "\(error!.userInfo[NSLocalizedDescriptionKey])")
       }
-      // Dismiss tab bar controller and return to login view.
-      self.tabBarController!.dismissViewControllerAnimated(true, completion: nil)
     }
+    // Dismiss tab bar controller and return to login view.
+    self.tabBarController!.dismissViewControllerAnimated(true, completion: nil)
   }
   
   func performUIUpdatesOnMain(updates: () -> Void) {
