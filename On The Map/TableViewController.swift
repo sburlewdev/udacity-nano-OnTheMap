@@ -66,10 +66,21 @@ extension TableViewController {
     print("Index: \(indexPath.row)")
     let location = self.pClient.studentLocations[indexPath.row]
     
+    let cellColors: [UIColor] = [
+      .blueColor(),
+      .purpleColor(),
+      .redColor(),
+      .orangeColor(),
+      .yellowColor(),
+      .greenColor()
+    ]
+    
     cell.textLabel!.text = location.firstName + " " + location.lastName
     cell.detailTextLabel!.text = location.mediaURL?.description
-    cell.imageView!.backgroundColor = .redColor()
-    cell.imageView!.tintColor = .blueColor()
+    cell.imageView!.backgroundColor = cellColors[indexPath.row % cellColors.count]
+    performUIUpdatesOnMain {
+      cell.imageView!.layer.cornerRadius = cell.imageView!.frame.height / 2.0
+    }
     
     return cell
   }
