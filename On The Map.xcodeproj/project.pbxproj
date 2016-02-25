@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D70177361C7ED398002C7527 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70177351C7ED398002C7527 /* TabBarController.swift */; };
 		D72CC1541C7C0C17006888D4 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CC1531C7C0C17006888D4 /* StudentInformation.swift */; };
 		D72CC1581C7CDF9C006888D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CC1571C7CDF9C006888D4 /* Constants.swift */; };
 		D72CC1631C7D1FAF006888D4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CC1621C7D1FAF006888D4 /* MapViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D70177351C7ED398002C7527 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D72CC1531C7C0C17006888D4 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		D72CC1571C7CDF9C006888D4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D72CC1621C7D1FAF006888D4 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				D72CC1641C7D1FC4006888D4 /* LoginViewController.swift */,
+				D70177351C7ED398002C7527 /* TabBarController.swift */,
 				D72CC1621C7D1FAF006888D4 /* MapViewController.swift */,
 				D72CC1651C7D1FC4006888D4 /* TableViewController.swift */,
 			);
@@ -199,6 +202,7 @@
 				D72CC1541C7C0C17006888D4 /* StudentInformation.swift in Sources */,
 				D73E1C111C7665CA00F277E2 /* ParseClient.swift in Sources */,
 				D72CC1631C7D1FAF006888D4 /* MapViewController.swift in Sources */,
+				D70177361C7ED398002C7527 /* TabBarController.swift in Sources */,
 				D73E1BFB1C7625D000F277E2 /* AppDelegate.swift in Sources */,
 				D72CC1661C7D1FC4006888D4 /* LoginViewController.swift in Sources */,
 				D73E1C0D1C7625E400F277E2 /* UdacityClient.swift in Sources */,
@@ -321,6 +325,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Burlew.On-The-Map";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -332,6 +337,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Burlew.On-The-Map";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
