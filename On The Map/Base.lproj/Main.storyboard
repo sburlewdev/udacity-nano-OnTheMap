@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
@@ -32,7 +33,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OG-ib-ZQx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Login to Udacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OG-ib-ZQx">
                                 <rect key="frame" x="227" y="233" width="147" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -69,6 +70,17 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cJy-Fm-QGR">
                                 <rect key="frame" x="282" y="416" width="37" height="37"/>
                             </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="MUU-gF-sgS">
+                                <rect key="frame" x="0.0" y="20" width="600" height="173"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="MUU-gF-sgS" secondAttribute="height" multiplier="1:1" id="V30-g1-jj9"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="V30-g1-jj9"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -81,14 +93,19 @@
                             <constraint firstItem="3yH-QM-YCd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IaS-nH-1EY"/>
                             <constraint firstItem="0OG-ib-ZQx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Llg-J1-BZy"/>
                             <constraint firstItem="3yH-QM-YCd" firstAttribute="height" secondItem="AtP-Pc-UTw" secondAttribute="height" id="NCF-F9-mY6"/>
+                            <constraint firstItem="0OG-ib-ZQx" firstAttribute="top" secondItem="MUU-gF-sgS" secondAttribute="bottom" constant="40" id="QHg-nW-3dG"/>
                             <constraint firstAttribute="leadingMargin" secondItem="zqy-vG-tCk" secondAttribute="leading" id="SNo-YO-b10"/>
                             <constraint firstItem="AtP-Pc-UTw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="20" id="Xq1-mA-L0w"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MUU-gF-sgS" secondAttribute="trailing" constant="-20" id="aUy-dz-mV1"/>
                             <constraint firstItem="zqy-vG-tCk" firstAttribute="width" secondItem="AtP-Pc-UTw" secondAttribute="width" id="dWO-cL-mkp"/>
                             <constraint firstItem="tZX-UU-e1G" firstAttribute="top" secondItem="3yH-QM-YCd" secondAttribute="bottom" constant="8" id="iT8-2F-dwG"/>
                             <constraint firstItem="AtP-Pc-UTw" firstAttribute="height" secondItem="zqy-vG-tCk" secondAttribute="height" id="nAO-1h-Ihz"/>
                             <constraint firstItem="3yH-QM-YCd" firstAttribute="width" secondItem="AtP-Pc-UTw" secondAttribute="width" id="oxc-9P-Ifx"/>
                             <constraint firstItem="zqy-vG-tCk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="poV-sj-j8E"/>
+                            <constraint firstItem="MUU-gF-sgS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sfX-X0-WzS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zqy-vG-tCk" secondAttribute="trailing" id="twG-8j-tHd"/>
+                            <constraint firstItem="MUU-gF-sgS" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="vnM-XZ-gl0"/>
+                            <constraint firstItem="MUU-gF-sgS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="wkY-QT-CoZ"/>
                             <constraint firstItem="zqy-vG-tCk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-20" id="woE-kz-TIw"/>
                         </constraints>
                     </view>
@@ -316,5 +333,6 @@
         <image name="map" width="25" height="25"/>
         <image name="mapFilled" width="25" height="25"/>
         <image name="marker" width="32" height="32"/>
+        <image name="udacity" width="939" height="1024"/>
     </resources>
 </document>
