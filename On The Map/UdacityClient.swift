@@ -58,7 +58,7 @@ extension UdacityClient {
       // 1. Check for errors
       // Validate authentication
       guard error == nil else {
-        return completionHandler(error: error)
+        return completionHandler(error: error!)
       }
       
       // 2. Handle data
@@ -72,7 +72,7 @@ extension UdacityClient {
         // 1. Check for errors
         // Validate user data
         guard error == nil else {
-          return completionHandler(error: error)
+          return completionHandler(error: error!)
         }
         
         // 2. Handle data
