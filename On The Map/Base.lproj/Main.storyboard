@@ -216,13 +216,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qte-sc-rhf">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="qte-sc-rhf" secondAttribute="trailing" constant="-20" id="24w-Q2-ZWv"/>
-                            <constraint firstItem="O0Q-FW-UbR" firstAttribute="top" secondItem="qte-sc-rhf" secondAttribute="bottom" id="fUV-KK-g8w"/>
+                            <constraint firstItem="O0Q-FW-UbR" firstAttribute="top" secondItem="qte-sc-rhf" secondAttribute="bottom" constant="-49" id="GOu-5Q-QmJ"/>
                             <constraint firstItem="qte-sc-rhf" firstAttribute="leading" secondItem="8Ls-Qx-dc0" secondAttribute="leadingMargin" constant="-20" id="wM6-zy-YbX"/>
                             <constraint firstItem="qte-sc-rhf" firstAttribute="top" secondItem="b8u-Ug-BJt" secondAttribute="bottom" id="yrP-Yn-Kq4"/>
                         </constraints>
@@ -256,7 +256,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="4uv-03-meT">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" modalTransitionStyle="crossDissolve" id="3Dw-Cw-cD0" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" modalTransitionStyle="crossDissolve" id="3Dw-Cw-cD0" customClass="TabBarController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="DRN-ZQ-euS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
