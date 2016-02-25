@@ -24,7 +24,7 @@ extension UIViewController {
     guard let url = NSURL(string: urlString) where url.scheme == "http" || url.scheme == "https" else {
       return self.alert(withTitle: "URL Error", message: "The link you selected is not a valid URL, or does not use HTTP or HTTPS.")
     }
-    // Open with SFSafariViewController
+    
     let safari = SFSafariViewController(URL: url)
     self.presentViewController(safari, animated: true, completion: nil)
   }
@@ -33,13 +33,12 @@ extension UIViewController {
     // Log out with Udacity client.
     UdacityClient.sharedInstance().logoutUdacity { error in
       
-      // Check for errors.
+      // Check for errors
       guard error == nil else {
-        // Display alert to user with error message.
         return self.alert(withTitle: "Logout Error", message: "\(error!.userInfo[NSLocalizedDescriptionKey])")
       }
     }
-    // Dismiss tab bar controller and return to login view.
+    // Dismiss tab bar controller and return to login view
     self.tabBarController!.dismissViewControllerAnimated(true, completion: nil)
   }
   
