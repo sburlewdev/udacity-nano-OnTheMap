@@ -20,9 +20,17 @@ class LoginViewController: UIViewController {
   // Udacity client
   let uClient = UdacityClient.sharedInstance()
   
+  override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    return .LightContent
+  }
+  
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
+    // Round the corners of loginButton
+    self.loginButton.layer.cornerRadius = self.loginButton.frame.height / 2.0
+    
+    // Toggle loginButton whenever either text field's contents change
     self.emailTextField.addTarget(self, action: "toggleLoginButton", forControlEvents: UIControlEvents.EditingChanged)
     self.passwordTextField.addTarget(self, action: "toggleLoginButton", forControlEvents: UIControlEvents.EditingChanged)
     
