@@ -40,6 +40,7 @@ class TableViewController: UITableViewController {
     
     self.pClient.getStudentLocations { error in
       
+      self.tableView.reloadData()
       guard error == nil else {
         return self.alert(withTitle: "Download Error", message: "\(error!.userInfo[NSLocalizedDescriptionKey])")
       }
