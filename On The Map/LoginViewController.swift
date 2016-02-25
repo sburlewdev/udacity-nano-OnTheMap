@@ -93,6 +93,7 @@ class LoginViewController: UIViewController {
       }
       
       // Present tab bar controller
+      NSUserDefaults.standardUserDefaults().setBool(false, forKey: "AlreadyAnimatedTabBar")
       let tabBarVC = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
       self.presentViewController(tabBarVC, animated: true, completion: nil)
     }

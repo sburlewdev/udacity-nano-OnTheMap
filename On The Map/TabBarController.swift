@@ -13,10 +13,14 @@ class TabBarController: UITabBarController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    self.view.transform = CGAffineTransformMakeScale(0.0, 0.0)
-    
-    UIView.animateWithDuration(0.5) {
-      self.view.transform = CGAffineTransformIdentity
+    if NSUserDefaults.standardUserDefaults().boolForKey("AlreadyAnimatedTabBar") == false {
+      NSUserDefaults.standardUserDefaults().setBool(true, forKey: "AlreadyAnimatedTabBar")
+      
+      self.view.transform = CGAffineTransformMakeScale(0.0, 0.0)
+      
+      UIView.animateWithDuration(0.5) {
+        self.view.transform = CGAffineTransformIdentity
+      }
     }
   }
 }
