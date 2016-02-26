@@ -8,17 +8,12 @@
 
 import Foundation
 
-private let session = NSURLSession.sharedSession()
-
-// Type Aliases
-typealias BasicCompletionHandler = (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void
-typealias JSONCompletionHandler = (data: NSData?, error: NSError?) -> Void
-
 // Error Message Keys
 struct ErrorMessageKeys {
-  static let HTTPCode = "Returned HTTP status code {code}."
+  static let HTTPCode = "Returned HTTP status code " // + status code
   static let InvalidData = "Invalid data."
   static let ParseFailure = "Failed to parse data."
+  static let FindFailure = "Failed to find " // + element
 }
 
 // HTTP Request Header Keys
@@ -61,12 +56,12 @@ struct JSONResponseKeys {
   // Udacity
   // Authentication
   static let Session = "session"
-  static let Expiration = "expiration"
-  static let ID = "id"
+  static let SessionExpiration = "expiration"
+  static let SessionID = "id"
   
   // User data
   static let Account = "account"
-  static let Key = "key"
+  static let UserKey = "key"
   static let Registered = "registered"
   static let User = "user"
   static let Email = "email"
@@ -81,11 +76,5 @@ struct ParseMethods {
 
 struct UdacityMethods {
   static let Session = "/session"
-  static let User = "/users/{id}"
-}
-
-// Text placeholders
-struct Placeholders {
-  static let HTTPCode = "{code}"
-  static let ID = "{id}"
+  static let User = "/users/" // + user ID
 }
