@@ -89,7 +89,7 @@ class LoginViewController: UIViewController {
       
       // Check for errors
       guard error == nil else {
-        return self.alert(withTitle: "Login Error", message: "\(error!.userInfo[NSLocalizedDescriptionKey]!)")
+        return self.alert(withTitle: "Login Error", message: error!.userInfo[NSLocalizedDescriptionKey] as! String)
       }
       
       // Present tab bar controller
