@@ -42,7 +42,7 @@ extension NetworkClient {
       // 2. Check HTTP status code
       let httpResponse = response as! NSHTTPURLResponse
       guard httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299 else {
-        let message = ErrorMessageKeys.HTTPCode.stringByReplacingOccurrencesOfString(Placeholders.HTTPCode, withString: "\(httpResponse.statusCode)")
+        let message = ErrorMessageKeys.HTTPCode + "\(httpResponse.statusCode)."
         return jsonCompletionHandler(data: nil, error: NSError.getError(withDomain: errorDomain, message: message))
       }
       
