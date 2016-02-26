@@ -131,7 +131,7 @@ extension UdacityClient {
       // 3. Parse through JSON object
       // No JSON object necessary
       
-      // 4. Pass values up to level 3
+      // 4. Pass values up
       // No values need to be passed up
       completionHandler(error: nil)
     }
@@ -141,7 +141,7 @@ extension UdacityClient {
     let domain = ErrorDomain.Udacity + "getUserInfo"
     
     guard let userKey = self.userKey else {
-      return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ""))
+      return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.NoUserKey))
     }
     
     // 1. Call level 1 method
@@ -176,7 +176,7 @@ extension UdacityClient {
         return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "Facebook ID"))
       }
       
-      let userInfo = [
+      let userInfo : [String : AnyObject] = [
         JSONResponseKeys.FacebookID : facebookID
       ]
       
@@ -235,7 +235,7 @@ extension UdacityClient {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "session expiration"))
       }
       
-      let sessionInfo = [
+      let sessionInfo: [String : AnyObject] = [
         JSONResponseKeys.SessionID : sessionID,
         JSONResponseKeys.SessionExpiration : sessionExpiration,
         JSONResponseKeys.UserKey : userKey
