@@ -10,10 +10,17 @@ import Foundation
 
 // Error Message Keys
 struct ErrorMessageKeys {
+  static let NoUserKey = "User key not initialized"
   static let HTTPCode = "Returned HTTP status code " // + status code
-  static let InvalidData = "Invalid data."
-  static let ParseFailure = "Failed to parse data."
+  static let InvalidData = "Invalid data"
+  static let ParseFailure = "Failed to parse data"
   static let FindFailure = "Failed to find " // + element
+}
+
+// Error Domain Values
+struct ErrorDomain {
+  static let Udacity = "UdacityClient."
+  static let Parse = "ParseClient."
 }
 
 // HTTP Request Header Keys
@@ -55,16 +62,16 @@ struct JSONResponseKeys {
   
   // Udacity
   // Authentication
-  static let Session = "session"
+  static let SessionDict = "session"
   static let SessionExpiration = "expiration"
   static let SessionID = "id"
   
   // User data
-  static let Account = "account"
+  static let AccountDict = "account"
   static let UserKey = "key"
   static let Registered = "registered"
   static let User = "user"
-  static let Email = "email"
+  static let EmailDict = "email"
   static let EmailAddress = "address"
   static let FacebookID = "_facebook_id"
 }
