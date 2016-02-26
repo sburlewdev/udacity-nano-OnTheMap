@@ -130,29 +130,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MapTableCell" textLabel="621-bS-y8d" detailTextLabel="POh-Dq-dll" imageView="egU-n3-oQc" style="IBUITableViewCellStyleSubtitle" id="WYO-K8-b86">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MapTableCell" textLabel="621-bS-y8d" detailTextLabel="POh-Dq-dll" imageView="egU-n3-oQc" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="WYO-K8-b86">
+                                <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WYO-K8-b86" id="cGG-OT-Rqp">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="621-bS-y8d">
-                                            <rect key="frame" x="62" y="5" width="32" height="20"/>
+                                            <rect key="frame" x="62" y="13" width="32" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="POh-Dq-dll">
-                                            <rect key="frame" x="62" y="25" width="41" height="14"/>
+                                            <rect key="frame" x="62" y="33" width="41" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="marker" id="egU-n3-oQc">
-                                            <rect key="frame" x="15" y="5" width="32" height="32"/>
+                                            <rect key="frame" x="15" y="13" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -177,7 +177,11 @@
                                     <action selector="refresh:" destination="tF5-6l-p4f" id="PUw-XK-WDj"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="marker" id="kXU-yk-FeA"/>
+                            <barButtonItem image="marker" id="kXU-yk-FeA">
+                                <connections>
+                                    <action selector="createNewLocation:" destination="tF5-6l-p4f" id="F6e-pY-PKl"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -185,6 +189,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
+                        <outlet property="markerButton" destination="kXU-yk-FeA" id="XyZ-LA-qaa"/>
                         <outlet property="refreshButton" destination="9U8-gP-lKv" id="OEQ-LR-7JT"/>
                     </connections>
                 </tableViewController>
@@ -256,7 +261,11 @@
                                     <action selector="refresh:" destination="pve-fW-cgO" id="pji-YB-sf8"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="marker" id="Tgf-Yz-INB"/>
+                            <barButtonItem image="marker" id="Tgf-Yz-INB">
+                                <connections>
+                                    <action selector="createNewLocation:" destination="pve-fW-cgO" id="BLo-Yh-tpH"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
