@@ -20,6 +20,7 @@
 		D73E1C0D1C7625E400F277E2 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73E1C0C1C7625E400F277E2 /* UdacityClient.swift */; };
 		D73E1C0F1C7656F600F277E2 /* XUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73E1C0E1C7656F600F277E2 /* XUIViewController.swift */; };
 		D73E1C111C7665CA00F277E2 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73E1C101C7665CA00F277E2 /* ParseClient.swift */; };
+		D773A3B91C80D7BA00BEFD67 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D773A3B81C80D7BA00BEFD67 /* NetworkClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D73E1C0C1C7625E400F277E2 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		D73E1C0E1C7656F600F277E2 /* XUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XUIViewController.swift; sourceTree = "<group>"; };
 		D73E1C101C7665CA00F277E2 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		D773A3B81C80D7BA00BEFD67 /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				D72CC1571C7CDF9C006888D4 /* Constants.swift */,
 				D73E1C101C7665CA00F277E2 /* ParseClient.swift */,
 				D73E1C0C1C7625E400F277E2 /* UdacityClient.swift */,
+				D773A3B81C80D7BA00BEFD67 /* NetworkClient.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				D73E1C111C7665CA00F277E2 /* ParseClient.swift in Sources */,
 				D72CC1631C7D1FAF006888D4 /* MapViewController.swift in Sources */,
 				D70177361C7ED398002C7527 /* TabBarController.swift in Sources */,
+				D773A3B91C80D7BA00BEFD67 /* NetworkClient.swift in Sources */,
 				D73E1BFB1C7625D000F277E2 /* AppDelegate.swift in Sources */,
 				D72CC1661C7D1FC4006888D4 /* LoginViewController.swift in Sources */,
 				D73E1C0D1C7625E400F277E2 /* UdacityClient.swift in Sources */,
