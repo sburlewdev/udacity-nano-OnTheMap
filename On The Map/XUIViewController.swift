@@ -35,7 +35,7 @@ extension UIViewController {
       
       // Check for errors
       guard error == nil else {
-        return self.alert(withTitle: "Logout Error", message: "\(error!.userInfo[NSLocalizedDescriptionKey])")
+        return self.alert(withTitle: "Logout Error", message: error!.userInfo[NSLocalizedDescriptionKey] as! String)
       }
     }
     // Dismiss tab bar controller and return to login view
