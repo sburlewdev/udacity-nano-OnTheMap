@@ -22,6 +22,7 @@ protocol NetworkClient {
   func dataTask(request: NSURLRequest, errorDomain: String, jsonCompletionHandler: JSONCompletionHandler) -> NSURLSessionDataTask
 }
 
+// Provide implementation for all networking clients who adopt NetworkClient
 extension NetworkClient {
 
   func dataTask(request: NSURLRequest, errorDomain: String, jsonCompletionHandler: JSONCompletionHandler) -> NSURLSessionDataTask {
