@@ -8,6 +8,12 @@
 
 import Foundation
 
+private let session = NSURLSession.sharedSession()
+
+// Type Aliases
+typealias BasicCompletionHandler = (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void
+typealias JSONCompletionHandler = (data: NSData?, error: NSError?) -> Void
+
 // Error Message Keys
 struct ErrorMessageKeys {
   static let HTTPCode = "Returned HTTP status code {code}."
