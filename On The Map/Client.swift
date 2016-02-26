@@ -17,6 +17,11 @@ import Foundation
 
 private let session = NSURLSession.sharedSession()
 
+// Type Aliases
+// WARNING: The "typealias" keyword will be deprecated in Swift 2.2
+// https://github.com/apple/swift-evolution/blob/master/proposals/0011-replace-typealias-associated.md
+typealias JSONCompletionHandler = (data: NSData?, error: NSError?) -> Void
+
 // All networking clients should adopt this protocol
 protocol NetworkClient {
   func dataTask(request: NSURLRequest, errorDomain: String, jsonCompletionHandler: JSONCompletionHandler) -> NSURLSessionDataTask
@@ -27,7 +32,7 @@ extension NetworkClient {
 
   func dataTask(request: NSURLRequest, errorDomain: String, jsonCompletionHandler: JSONCompletionHandler) -> NSURLSessionDataTask {
     // Basic completion handler for all URL requests
-    let basicHandler: BasicCompletionHandler = { data, response, error in
+    let basicHandler: (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void = { data, response, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -57,6 +62,6 @@ extension NetworkClient {
 
 extension NSError {
   class func getError(withDomain domain: String, message: String) -> NSError {
-    return NSError(domain: domain, code: 1, userInfo: [NSLocalizedDescriptionKey : message])
+    return NSError(domain: domain, code: 1, userInfo: [NSLocalizedDescriptionKey : domain + " : " + message])
   }
 }
