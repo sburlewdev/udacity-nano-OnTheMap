@@ -49,6 +49,7 @@ struct HTTPMethods {
 struct JSONResponseKeys {
   // Parse
   // Student location
+  static let ResultsArray = "results"
   static let CreatedAt = "createdAt"
   static let FirstName = "firstName"
   static let LastName = "lastName"
