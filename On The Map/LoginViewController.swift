@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
   
@@ -15,6 +17,7 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var loginButton: UIButton!
+  @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
   @IBOutlet weak var signUpButton: UIButton!
   
   // Udacity client
@@ -28,6 +31,7 @@ class LoginViewController: UIViewController {
     super.viewDidAppear(animated)
     
     // Round the corners of loginButton
+    self.facebookLoginButton.layer.cornerRadius = self.facebookLoginButton.frame.height / 2.0
     self.loginButton.layer.cornerRadius = self.loginButton.frame.height / 2.0
     self.emailTextField.layer.cornerRadius = self.emailTextField.frame.height / 2.0
     self.passwordTextField.layer.cornerRadius = self.passwordTextField.frame.height / 2.0

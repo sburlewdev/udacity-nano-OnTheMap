@@ -81,6 +81,10 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5IK-Od-m9j" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="20" y="550" width="560" height="30"/>
+                                <state key="normal" title="Login with Facebook"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -92,13 +96,17 @@
                             <constraint firstItem="cJy-Fm-QGR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HZM-ds-Br0"/>
                             <constraint firstItem="3yH-QM-YCd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IaS-nH-1EY"/>
                             <constraint firstItem="0OG-ib-ZQx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Llg-J1-BZy"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="5IK-Od-m9j" secondAttribute="leading" id="LoD-TD-SSf"/>
                             <constraint firstItem="3yH-QM-YCd" firstAttribute="height" secondItem="AtP-Pc-UTw" secondAttribute="height" id="NCF-F9-mY6"/>
                             <constraint firstItem="0OG-ib-ZQx" firstAttribute="top" secondItem="MUU-gF-sgS" secondAttribute="bottom" constant="40" id="QHg-nW-3dG"/>
                             <constraint firstAttribute="leadingMargin" secondItem="zqy-vG-tCk" secondAttribute="leading" id="SNo-YO-b10"/>
                             <constraint firstItem="AtP-Pc-UTw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="20" id="Xq1-mA-L0w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MUU-gF-sgS" secondAttribute="trailing" constant="-20" id="aUy-dz-mV1"/>
                             <constraint firstItem="zqy-vG-tCk" firstAttribute="width" secondItem="AtP-Pc-UTw" secondAttribute="width" id="dWO-cL-mkp"/>
+                            <constraint firstItem="5IK-Od-m9j" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h9h-Ye-349"/>
                             <constraint firstItem="tZX-UU-e1G" firstAttribute="top" secondItem="3yH-QM-YCd" secondAttribute="bottom" constant="8" id="iT8-2F-dwG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5IK-Od-m9j" secondAttribute="trailing" id="kNA-9p-rXZ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5IK-Od-m9j" secondAttribute="bottom" constant="20" id="lHF-TB-Qpx"/>
                             <constraint firstItem="AtP-Pc-UTw" firstAttribute="height" secondItem="zqy-vG-tCk" secondAttribute="height" id="nAO-1h-Ihz"/>
                             <constraint firstItem="3yH-QM-YCd" firstAttribute="width" secondItem="AtP-Pc-UTw" secondAttribute="width" id="oxc-9P-Ifx"/>
                             <constraint firstItem="zqy-vG-tCk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="poV-sj-j8E"/>
@@ -113,6 +121,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="cJy-Fm-QGR" id="EE7-Iz-uOk"/>
                         <outlet property="emailTextField" destination="zqy-vG-tCk" id="9kV-aT-KQP"/>
+                        <outlet property="facebookLoginButton" destination="5IK-Od-m9j" id="xGK-pg-8st"/>
                         <outlet property="loginButton" destination="3yH-QM-YCd" id="cGH-2M-naQ"/>
                         <outlet property="passwordTextField" destination="AtP-Pc-UTw" id="UcZ-of-zCq"/>
                         <outlet property="signUpButton" destination="tZX-UU-e1G" id="qNA-yX-FZq"/>
@@ -204,7 +213,6 @@
         <!--New Location View Controller-->
         <scene sceneID="ESO-mJ-tHK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5jQ-if-aTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="jTj-dz-2gZ" customClass="NewLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3wv-2r-UVS"/>
@@ -289,6 +297,7 @@
                         <outlet property="mapView" destination="IqM-eE-fZv" id="1JY-vG-hvz"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5jQ-if-aTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2537" y="142"/>
         </scene>
