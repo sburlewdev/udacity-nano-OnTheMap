@@ -33,28 +33,6 @@ class TableViewController: UITableViewController {
     self.logout()
   }
   
-  @IBAction func createNewLocation(sender: AnyObject) {
-    
-    var location: [String : AnyObject] = [
-      JSONResponseKeys.UniqueKey : "blergh!!",
-      JSONResponseKeys.FirstName : "test",
-      JSONResponseKeys.LastName : "bros",
-      JSONResponseKeys.MapString : "Somewhere Over the Rainbow",
-      JSONResponseKeys.MediaURL : "https://www.realm.io",
-      JSONResponseKeys.Latitude : 0.0,
-      JSONResponseKeys.Longitude : 5.0
-    ]
-    
-    self.pClient.createStudentLocation(location) { error in
-      
-      guard error == nil else {
-        return self.alert(withTitle: "New Location Error", message: error!.userInfo[NSLocalizedDescriptionKey] as! String)
-      }
-      
-      self.refresh(self)
-    }
-  }
-  
   @IBAction func refresh(sender: AnyObject) {
     let attributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
     self.refreshControl!.attributedTitle = NSAttributedString(string: "Last updated on \(NSDate())", attributes: attributes)
