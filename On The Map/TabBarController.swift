@@ -13,6 +13,8 @@ class TabBarController: UITabBarController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
+    self.setStyling()
+    
     if NSUserDefaults.standardUserDefaults().boolForKey("AlreadyAnimatedTabBar") == false {
       NSUserDefaults.standardUserDefaults().setBool(true, forKey: "AlreadyAnimatedTabBar")
       
@@ -22,5 +24,9 @@ class TabBarController: UITabBarController {
         self.view.transform = CGAffineTransformIdentity
       }
     }
+  }
+  
+  func setStyling() {
+    self.tabBar.tintColor = UIColor(red: 0.0, green: 0.2, blue: 0.4, alpha: 1.0)
   }
 }
