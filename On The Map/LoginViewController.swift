@@ -29,6 +29,8 @@ class LoginViewController: UIViewController {
     
     // Round the corners of loginButton
     self.loginButton.layer.cornerRadius = self.loginButton.frame.height / 2.0
+    self.emailTextField.layer.cornerRadius = self.emailTextField.frame.height / 2.0
+    self.passwordTextField.layer.cornerRadius = self.passwordTextField.frame.height / 2.0
     
     // Toggle loginButton whenever either text field's contents change
     self.emailTextField.addTarget(self, action: "toggleLoginButton", forControlEvents: UIControlEvents.EditingChanged)
