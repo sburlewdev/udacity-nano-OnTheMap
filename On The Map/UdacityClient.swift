@@ -14,15 +14,16 @@ class UdacityClient {
   private static let apiPath = "https://www.udacity.com/api"
   
   // Authentication
-  private var sessionID: String?
-  private var sessionExpiration: NSDate?
+  private var sessionID: String!
+  private var sessionExpiration: NSDate!
   
   // User data
-  private var userKey: String?
-  private var facebookID: String?
+  private var facebookID: String!
   
-  private func setUserID(id: String?) {
-    ParseClient.sharedInstance().userID = id
+  private func reset() {
+    self.sessionID = nil
+    self.sessionExpiration = nil
+    self.facebookID = nil
   }
 }
 
@@ -37,7 +38,7 @@ extension UdacityClient {
   
   func loginUdacity(withEmail email: String, password: String, completionHandler: (error: NSError?) -> Void) {
     
-    // Create JSON object for authenticating session
+    // Construct JSON object for authenticating session
     var jsonBody = "{\n"
     jsonBody += "  \"udacity\": {\n"
     jsonBody += "    \"username\": \"\(email)\",\n"
@@ -55,12 +56,12 @@ extension UdacityClient {
       }
       
       // 2. Handle data
-      self.userKey = (sessionInfo[JSONResponseKeys.UserKey] as! String)
-      self.sessionID = (sessionInfo[JSONResponseKeys.SessionID] as! String)
-      self.sessionExpiration = NSDate.dateFromString(sessionInfo[JSONResponseKeys.SessionExpiration] as! String)
+      let userKey = (sessionInfo[JSONResponseKeys.UUserKey] as! String)
+      self.sessionID = (sessionInfo[JSONResponseKeys.USessionID] as! String)
+      self.sessionExpiration = NSDate.dateFromString(sessionInfo[JSONResponseKeys.USessionExpiration] as! String)
       
       // Get user info
-      self.getUserInfo { userInfo, error in
+      self.getUserInfo(userKey) { userInfo, error in
         
         // 1. Check for errors
         // Validate user data
@@ -69,10 +70,12 @@ extension UdacityClient {
         }
         
         // 2. Handle data
-        self.facebookID = (userInfo[JSONResponseKeys.FacebookID] as! String)
+        let firstName = (userInfo[JSONResponseKeys.UFirstName] as! String)
+        let lastName = (userInfo[JSONResponseKeys.ULastName] as! String)
+        self.facebookID = (userInfo[JSONResponseKeys.UFacebookID] as! String)
         
-        // Set userID for Parse client
-        ParseClient.sharedInstance()//setUserID
+        // Set user info for Parse client
+        ParseClient.sharedInstance().setUserInfo(self.sessionID, userID: userKey, firstName: firstName, lastName: lastName)
         
         // 3. Call external completion handler
         completionHandler(error: nil)
@@ -81,6 +84,7 @@ extension UdacityClient {
   }
   
   func logoutUdacity(completionHandler: (error: NSError?) -> Void) {
+    let domain = ErrorDomain.Udacity + "logoutUdacity"
     
     // 1. Call level 2 method
     self.deleteSession { error in
@@ -91,13 +95,11 @@ extension UdacityClient {
       }
       
       // 2. Handle data
-      self.sessionID = nil
-      self.sessionExpiration = nil
-      self.userKey = nil
-      self.facebookID = nil
+      guard ParseClient.sharedInstance().reset(self.sessionID) == true else {
+        return completionHandler(error: NSError.getError(withDomain: domain, message: "Failed to clear Parse data"))
+      }
       
-      // Delete user ID from Parse client
-      ParseClient.sharedInstance()//setUserID
+      self.reset()
       
       // 3. Call external completion handler
       completionHandler(error: nil)
@@ -137,12 +139,8 @@ extension UdacityClient {
     }
   }
   
-  private func getUserInfo(completionHandler: (userInfo: [String: AnyObject]!, error: NSError?) -> Void) {
+  private func getUserInfo(userKey: String, completionHandler: (userInfo: [String: AnyObject]!, error: NSError?) -> Void) {
     let domain = ErrorDomain.Udacity + "getUserInfo"
-    
-    guard let userKey = self.userKey else {
-      return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.NoUserKey))
-    }
     
     // 1. Call level 1 method
     self.requestGET(UdacityMethods.User + userKey) { data, error in
@@ -167,17 +165,29 @@ extension UdacityClient {
       
       // 3. Parse through JSON object
       // Get user dictionary
-      guard let jsonUser = parsedResult[JSONResponseKeys.User] as? [String : AnyObject] else {
+      guard let user = parsedResult[JSONResponseKeys.UUserDict] as? [String : AnyObject] else {
         return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "user dictionary"))
       }
       
+      // Get first name
+      guard let firstName = user[JSONResponseKeys.UFirstName] as? String else {
+        return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "first name"))
+      }
+      
+      // Get last name
+      guard let lastName = user[JSONResponseKeys.ULastName] as? String else {
+        return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "last name"))
+      }
+      
       // Get facebook ID
-      guard let facebookID = jsonUser[JSONResponseKeys.FacebookID] as? String else {
+      guard let facebookID = user[JSONResponseKeys.UFacebookID] as? String else {
         return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "Facebook ID"))
       }
       
       let userInfo : [String : AnyObject] = [
-        JSONResponseKeys.FacebookID : facebookID
+        JSONResponseKeys.UFacebookID : facebookID,
+        JSONResponseKeys.UFirstName : firstName,
+        JSONResponseKeys.ULastName : lastName
       ]
       
       // 4. Pass user info up
@@ -211,34 +221,34 @@ extension UdacityClient {
       
       // 3. Parse through JSON object
       // Get account dictionary
-      guard let jsonAccount = parsedResult[JSONResponseKeys.AccountDict] as? [ String: AnyObject] else {
+      guard let jsonAccount = parsedResult[JSONResponseKeys.UAccountDict] as? [ String: AnyObject] else {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "user account dictionary"))
       }
       
       // Get user ID
-      guard let userKey = jsonAccount[JSONResponseKeys.UserKey] as? String else {
+      guard let userKey = jsonAccount[JSONResponseKeys.UUserKey] as? String else {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "user ID"))
       }
       
       // Get session dictionary
-      guard let jsonSession = parsedResult[JSONResponseKeys.SessionDict] as? [String : AnyObject] else {
+      guard let jsonSession = parsedResult[JSONResponseKeys.USessionDict] as? [String : AnyObject] else {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "session dictionary"))
       }
       
       // Get session ID
-      guard let sessionID = jsonSession[JSONResponseKeys.SessionID] as? String else {
+      guard let sessionID = jsonSession[JSONResponseKeys.USessionID] as? String else {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "session ID"))
       }
       
       // Get session expiration
-      guard let sessionExpiration = jsonSession[JSONResponseKeys.SessionExpiration] as? String else {
+      guard let sessionExpiration = jsonSession[JSONResponseKeys.USessionExpiration] as? String else {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "session expiration"))
       }
       
       let sessionInfo: [String : AnyObject] = [
-        JSONResponseKeys.SessionID : sessionID,
-        JSONResponseKeys.SessionExpiration : sessionExpiration,
-        JSONResponseKeys.UserKey : userKey
+        JSONResponseKeys.USessionID : sessionID,
+        JSONResponseKeys.USessionExpiration : sessionExpiration,
+        JSONResponseKeys.UUserKey : userKey
       ]
       
       // 4. Pass session info up
