@@ -49,32 +49,34 @@ struct HTTPMethods {
 struct JSONResponseKeys {
   // Parse
   // Student location
-  static let ResultsArray = "results"
-  static let CreatedAt = "createdAt"
-  static let FirstName = "firstName"
-  static let LastName = "lastName"
-  static let Latitude = "latitude"
-  static let Longitude = "longitude"
-  static let MapString = "mapString"
-  static let MediaURL = "mediaURL"
-  static let ObjectID = "objectId"
-  static let UniqueKey = "uniqueKey"
-  static let UpdatedAt = "updatedAt"
+  static let PResultsArray = "results"
+  static let PCreatedAt = "createdAt"
+  static let PFirstName = "firstName"
+  static let PLastName = "lastName"
+  static let PLatitude = "latitude"
+  static let PLongitude = "longitude"
+  static let PMapString = "mapString"
+  static let PMediaURL = "mediaURL"
+  static let PObjectID = "objectId"
+  static let PUniqueKey = "uniqueKey"
+  static let PUpdatedAt = "updatedAt"
   
   // Udacity
   // Authentication
-  static let SessionDict = "session"
-  static let SessionExpiration = "expiration"
-  static let SessionID = "id"
+  static let USessionDict = "session"
+  static let USessionExpiration = "expiration"
+  static let USessionID = "id"
   
   // User data
-  static let AccountDict = "account"
-  static let UserKey = "key"
-  static let Registered = "registered"
-  static let User = "user"
-  static let EmailDict = "email"
-  static let EmailAddress = "address"
-  static let FacebookID = "_facebook_id"
+  static let UAccountDict = "account"
+  static let UUserKey = "key"
+  static let URegistered = "registered"
+  static let UUserDict = "user"
+  static let UFirstName = "first_name"
+  static let ULastName = "last_name"
+  static let UEmailDict = "email"
+  static let UEmailAddress = "address"
+  static let UFacebookID = "_facebook_id"
 }
 
 // Methods
