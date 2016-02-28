@@ -117,9 +117,7 @@
 		D73E1BEE1C7625D000F277E2 = {
 			isa = PBXGroup;
 			children = (
-				D773A3BC1C83987C00BEFD67 /* FBSDKCoreKit.framework */,
-				D773A3BD1C83987C00BEFD67 /* FBSDKLoginKit.framework */,
-				D773A3BE1C83987C00BEFD67 /* FBSDKShareKit.framework */,
+				D773A3C41C83A11200BEFD67 /* Facebook SDK */,
 				D73E1BF91C7625D000F277E2 /* On The Map */,
 				D73E1BF81C7625D000F277E2 /* Products */,
 			);
@@ -154,6 +152,16 @@
 				D773A3C21C839C6000BEFD67 /* FBSDK-Bridging-Header.h */,
 			);
 			name = "Bridging Headers";
+			sourceTree = "<group>";
+		};
+		D773A3C41C83A11200BEFD67 /* Facebook SDK */ = {
+			isa = PBXGroup;
+			children = (
+				D773A3BC1C83987C00BEFD67 /* FBSDKCoreKit.framework */,
+				D773A3BD1C83987C00BEFD67 /* FBSDKLoginKit.framework */,
+				D773A3BE1C83987C00BEFD67 /* FBSDKShareKit.framework */,
+			);
+			name = "Facebook SDK";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
