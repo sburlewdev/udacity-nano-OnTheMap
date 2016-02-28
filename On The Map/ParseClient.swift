@@ -17,14 +17,42 @@ class ParseClient {
   // Parse API Path
   private static let apiPath = "https://api.parse.com/1"
   
+  // Session ID (get from Udacity client)
+  private var sessionID: String!
+  
   // User ID
-  var userID: String!
+  private (set) var userID: String!
+  
+  // User First & Last Name
+  private (set) var firstName: String!
+  private (set) var lastName: String!
   
   // ObjectID
-  private (set) var objectID: String!
+  private var objectID: String!
   
   // Student location data for display
   private (set) var studentLocations = [StudentInformation]()
+  
+  func setUserInfo(sessionID: String, userID: String?, firstName: String?, lastName: String?) {
+    self.sessionID = sessionID
+    self.userID = userID
+    self.firstName = firstName
+    self.lastName = lastName
+  }
+  
+  func reset(sessionID: String) -> Bool {
+    // Only reset if the function's caller has the correct session ID
+    if self.sessionID == sessionID {
+      self.sessionID = nil
+      self.userID = nil
+      self.firstName = nil
+      self.lastName = nil
+      self.objectID = nil
+      self.studentLocations = [StudentInformation]()
+      return true
+    }
+    return false
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,13 +88,13 @@ extension ParseClient {
   
   func createStudentLocation(newLocation: [String : AnyObject], completionHandler: (error: NSError?) -> Void) {
     var json = "{\n"
-    json += "  \"\(JSONResponseKeys.UniqueKey)\": \"\(newLocation[JSONResponseKeys.UniqueKey] as! String)\",\n"
-    json += "  \"\(JSONResponseKeys.FirstName)\": \"\(newLocation[JSONResponseKeys.FirstName] as! String)\",\n"
-    json += "  \"\(JSONResponseKeys.LastName)\": \"\(newLocation[JSONResponseKeys.LastName] as! String)\",\n"
-    json += "  \"\(JSONResponseKeys.MapString)\": \"\(newLocation[JSONResponseKeys.MapString] as! String)\",\n"
-    json += "  \"\(JSONResponseKeys.MediaURL)\": \"\(newLocation[JSONResponseKeys.MediaURL] as! String)\",\n"
-    json += "  \"\(JSONResponseKeys.Latitude)\": \(newLocation[JSONResponseKeys.Latitude] as! Float),\n"
-    json += "  \"\(JSONResponseKeys.Longitude)\": \(newLocation[JSONResponseKeys.Longitude] as! Float)\n"
+    json += "  \"\(JSONResponseKeys.PUniqueKey)\": \"\(newLocation[JSONResponseKeys.PUniqueKey] as! String)\",\n"
+    json += "  \"\(JSONResponseKeys.PFirstName)\": \"\(newLocation[JSONResponseKeys.PFirstName] as! String)\",\n"
+    json += "  \"\(JSONResponseKeys.PLastName)\": \"\(newLocation[JSONResponseKeys.PLastName] as! String)\",\n"
+    json += "  \"\(JSONResponseKeys.PMapString)\": \"\(newLocation[JSONResponseKeys.PMapString] as! String)\",\n"
+    json += "  \"\(JSONResponseKeys.PMediaURL)\": \"\(newLocation[JSONResponseKeys.PMediaURL] as! String)\",\n"
+    json += "  \"\(JSONResponseKeys.PLatitude)\": \(newLocation[JSONResponseKeys.PLatitude] as! Float),\n"
+    json += "  \"\(JSONResponseKeys.PLongitude)\": \(newLocation[JSONResponseKeys.PLongitude] as! Float)\n"
     json += "}"
     
     self.newStudentLocation(json) { newLocationInfo, error in
@@ -77,7 +105,7 @@ extension ParseClient {
       }
       
       // 2. Handle data
-      self.objectID = newLocationInfo[JSONResponseKeys.ObjectID] as! String
+      self.objectID = newLocationInfo[JSONResponseKeys.PObjectID] as! String
       
       // 3. Call external completion handler
       completionHandler(error: nil)
@@ -115,7 +143,7 @@ extension ParseClient {
       }
       
       // 3. Parse through JSON object
-      guard let locations = parsedResult[JSONResponseKeys.ResultsArray] as? [[String : AnyObject]] else {
+      guard let locations = parsedResult[JSONResponseKeys.PResultsArray] as? [[String : AnyObject]] else {
         return completionHandler(locations: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "results array"))
       }
       
@@ -144,12 +172,12 @@ extension ParseClient {
       }
       
       // 3. Parse through JSON object
-      guard let objectID = parsedResult[JSONResponseKeys.ObjectID] as? String else {
+      guard let objectID = parsedResult[JSONResponseKeys.PObjectID] as? String else {
         return completionHandler(newLocationInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "object ID"))
       }
       
       let newLocationInfo : [String : AnyObject] = [
-        JSONResponseKeys.ObjectID : objectID
+        JSONResponseKeys.PObjectID : objectID
       ]
       
       // 4. Pass new location info up
