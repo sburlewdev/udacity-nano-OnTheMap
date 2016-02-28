@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MapKit
 
 struct StudentInformation {
   
@@ -23,20 +22,20 @@ struct StudentInformation {
   let updatedAt: NSDate
   
   init(dictionary: [String : AnyObject]) {
-    self.firstName = dictionary[JSONResponseKeys.FirstName] as! String
-    self.lastName = dictionary[JSONResponseKeys.LastName] as! String
-    self.latitude = dictionary[JSONResponseKeys.Latitude] as! Double
-    self.longitude = dictionary[JSONResponseKeys.Longitude] as! Double
-    self.mapString = dictionary[JSONResponseKeys.MapString] as! String
-    self.objectID = dictionary[JSONResponseKeys.ObjectID] as! String
-    self.uniqueKey = dictionary[JSONResponseKeys.UniqueKey] as! String
+    self.firstName = dictionary[JSONResponseKeys.PFirstName] as! String
+    self.lastName = dictionary[JSONResponseKeys.PLastName] as! String
+    self.latitude = dictionary[JSONResponseKeys.PLatitude] as! Double
+    self.longitude = dictionary[JSONResponseKeys.PLongitude] as! Double
+    self.mapString = dictionary[JSONResponseKeys.PMapString] as! String
+    self.objectID = dictionary[JSONResponseKeys.PObjectID] as! String
+    self.uniqueKey = dictionary[JSONResponseKeys.PUniqueKey] as! String
     
-    let mediaURLString = dictionary[JSONResponseKeys.MediaURL] as! String
+    let mediaURLString = dictionary[JSONResponseKeys.PMediaURL] as! String
     self.mediaURL = NSURL(string: mediaURLString)
     
-    let createdAt = dictionary[JSONResponseKeys.CreatedAt] as! String
+    let createdAt = dictionary[JSONResponseKeys.PCreatedAt] as! String
     self.createdAt = NSDate.dateFromString(createdAt)
-    let updatedAt = dictionary[JSONResponseKeys.UpdatedAt] as! String
+    let updatedAt = dictionary[JSONResponseKeys.PUpdatedAt] as! String
     self.updatedAt = NSDate.dateFromString(updatedAt)
   }
 }
