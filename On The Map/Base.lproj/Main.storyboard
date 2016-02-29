@@ -21,26 +21,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zqy-vG-tCk">
-                                <rect key="frame" x="20" y="265" width="560" height="30"/>
+                                <rect key="frame" x="20" y="255" width="560" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="gJb-bR-WMt"/>
+                                    <constraint firstAttribute="height" constant="40" id="gJb-bR-WMt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AtP-Pc-UTw">
-                                <rect key="frame" x="20" y="305" width="560" height="30"/>
+                                <rect key="frame" x="20" y="305" width="560" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Login to Udacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OG-ib-ZQx">
-                                <rect key="frame" x="227" y="233" width="147" height="24"/>
+                                <rect key="frame" x="227" y="223" width="147" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZX-UU-e1G">
-                                <rect key="frame" x="209" y="381" width="182" height="27"/>
+                                <rect key="frame" x="209" y="401" width="182" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="182" id="DOk-ML-lzG"/>
                                     <constraint firstAttribute="height" constant="27" id="nLH-Rb-YBr"/>
@@ -54,10 +54,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yH-QM-YCd">
-                                <rect key="frame" x="20" y="343" width="560" height="30"/>
+                                <rect key="frame" x="20" y="353" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="xhd-VE-yTN"/>
+                                    <constraint firstAttribute="height" constant="40" id="xhd-VE-yTN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Log In">
@@ -68,10 +68,10 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cJy-Fm-QGR">
-                                <rect key="frame" x="282" y="416" width="37" height="37"/>
+                                <rect key="frame" x="282" y="436" width="37" height="37"/>
                             </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="MUU-gF-sgS">
-                                <rect key="frame" x="0.0" y="20" width="600" height="173"/>
+                                <rect key="frame" x="20" y="20" width="560" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="MUU-gF-sgS" secondAttribute="height" multiplier="1:1" id="V30-g1-jj9"/>
                                 </constraints>
@@ -86,7 +86,7 @@
                                 <state key="normal" title="Login with Facebook"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cJy-Fm-QGR" firstAttribute="top" secondItem="tZX-UU-e1G" secondAttribute="bottom" constant="8" id="4N2-eb-Rbo"/>
                             <constraint firstItem="3yH-QM-YCd" firstAttribute="top" secondItem="AtP-Pc-UTw" secondAttribute="bottom" constant="8" id="5di-So-1YC"/>
@@ -98,10 +98,10 @@
                             <constraint firstItem="0OG-ib-ZQx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Llg-J1-BZy"/>
                             <constraint firstAttribute="leadingMargin" secondItem="5IK-Od-m9j" secondAttribute="leading" id="LoD-TD-SSf"/>
                             <constraint firstItem="3yH-QM-YCd" firstAttribute="height" secondItem="AtP-Pc-UTw" secondAttribute="height" id="NCF-F9-mY6"/>
-                            <constraint firstItem="0OG-ib-ZQx" firstAttribute="top" secondItem="MUU-gF-sgS" secondAttribute="bottom" constant="40" id="QHg-nW-3dG"/>
+                            <constraint firstItem="0OG-ib-ZQx" firstAttribute="top" secondItem="MUU-gF-sgS" secondAttribute="bottom" constant="8" id="QHg-nW-3dG"/>
                             <constraint firstAttribute="leadingMargin" secondItem="zqy-vG-tCk" secondAttribute="leading" id="SNo-YO-b10"/>
-                            <constraint firstItem="AtP-Pc-UTw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="20" id="Xq1-mA-L0w"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MUU-gF-sgS" secondAttribute="trailing" constant="-20" id="aUy-dz-mV1"/>
+                            <constraint firstItem="AtP-Pc-UTw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="25" id="Xq1-mA-L0w"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MUU-gF-sgS" secondAttribute="trailing" id="aUy-dz-mV1"/>
                             <constraint firstItem="zqy-vG-tCk" firstAttribute="width" secondItem="AtP-Pc-UTw" secondAttribute="width" id="dWO-cL-mkp"/>
                             <constraint firstItem="5IK-Od-m9j" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h9h-Ye-349"/>
                             <constraint firstItem="tZX-UU-e1G" firstAttribute="top" secondItem="3yH-QM-YCd" secondAttribute="bottom" constant="8" id="iT8-2F-dwG"/>
@@ -113,8 +113,8 @@
                             <constraint firstItem="MUU-gF-sgS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sfX-X0-WzS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zqy-vG-tCk" secondAttribute="trailing" id="twG-8j-tHd"/>
                             <constraint firstItem="MUU-gF-sgS" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="vnM-XZ-gl0"/>
-                            <constraint firstItem="MUU-gF-sgS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="wkY-QT-CoZ"/>
-                            <constraint firstItem="zqy-vG-tCk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-20" id="woE-kz-TIw"/>
+                            <constraint firstItem="MUU-gF-sgS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="wkY-QT-CoZ"/>
+                            <constraint firstItem="zqy-vG-tCk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-25" id="woE-kz-TIw"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
@@ -123,6 +123,8 @@
                         <outlet property="emailTextField" destination="zqy-vG-tCk" id="9kV-aT-KQP"/>
                         <outlet property="facebookLoginButton" destination="5IK-Od-m9j" id="xGK-pg-8st"/>
                         <outlet property="loginButton" destination="3yH-QM-YCd" id="cGH-2M-naQ"/>
+                        <outlet property="loginLabel" destination="0OG-ib-ZQx" id="sBF-hd-4DI"/>
+                        <outlet property="logoImageView" destination="MUU-gF-sgS" id="gNS-ke-j9O"/>
                         <outlet property="passwordTextField" destination="AtP-Pc-UTw" id="UcZ-of-zCq"/>
                         <outlet property="signUpButton" destination="tZX-UU-e1G" id="qNA-yX-FZq"/>
                     </connections>
@@ -261,7 +263,7 @@
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="USS-kq-yb2" secondAttribute="trailing" id="1l5-la-rYM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IqM-eE-fZv" secondAttribute="trailing" constant="-20" id="4XV-j2-wKI"/>
@@ -421,7 +423,7 @@
         <image name="map" width="25" height="25"/>
         <image name="mapFilled" width="25" height="25"/>
         <image name="marker" width="32" height="32"/>
-        <image name="udacity" width="939" height="1024"/>
+        <image name="udacity" width="1000" height="175"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uh2-ZO-2Mx"/>
