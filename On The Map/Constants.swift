@@ -15,6 +15,7 @@ struct ErrorMessageKeys {
   static let InvalidData = "Invalid data"
   static let ParseFailure = "Failed to parse data"
   static let FindFailure = "Failed to find " // + element
+  static let Unknown = "Unknown error"
 }
 
 // Error Domain Values
