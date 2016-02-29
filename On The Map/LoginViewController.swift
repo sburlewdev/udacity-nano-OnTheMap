@@ -17,8 +17,10 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var loginButton: UIButton!
+  @IBOutlet weak var loginLabel: UILabel!
   @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
   @IBOutlet weak var signUpButton: UIButton!
+  @IBOutlet weak var logoImageView: UIImageView!
   
   // Udacity client
   let uClient = UdacityClient.sharedInstance()
@@ -30,8 +32,8 @@ class LoginViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
-    // Round the corners of loginButton
-    self.facebookLoginButton.layer.cornerRadius = self.facebookLoginButton.frame.height / 2.0
+    // Give buttons and text fields rounded corners
+    self.facebookLoginButton.layer.cornerRadius =  self.facebookLoginButton.frame.height / 2.0
     self.loginButton.layer.cornerRadius = self.loginButton.frame.height / 2.0
     self.emailTextField.layer.cornerRadius = self.emailTextField.frame.height / 2.0
     self.passwordTextField.layer.cornerRadius = self.passwordTextField.frame.height / 2.0
@@ -48,19 +50,48 @@ class LoginViewController: UIViewController {
     self.emailTextField.center.x -= self.view.frame.width
     self.passwordTextField.center.x -= self.view.frame.width
     self.loginButton.center.x -= self.view.frame.width
+    self.facebookLoginButton.center.x -= self.view.frame.width
     
-    UIView.animateWithDuration(0.5) {
-      self.emailTextField.center.x += self.view.frame.width
+    let height = self.logoImageView.frame.height / 2.0
+    self.logoImageView.alpha = 0.0
+    self.logoImageView.center.y += height
+    self.logoImageView.transform = CGAffineTransformMakeScale(0.2, 0.2)
+    
+    self.loginLabel.alpha = 0.0
+    self.signUpButton.alpha = 0.0
+    
+    UIView.animateWithDuration(1.0) {
+      self.logoImageView.alpha = 1.0
+      self.logoImageView.center.y -= height
+      self.logoImageView.transform = CGAffineTransformIdentity
     }
     UIView.animateWithDuration(0.5,
-      delay: 0.2,
+      delay: 1.0,
+      options: [],
+      animations: { self.emailTextField.center.x += self.view.frame.width },
+      completion: nil)
+    UIView.animateWithDuration(0.5,
+      delay: 1.2,
       options: [],
       animations: { self.passwordTextField.center.x += self.view.frame.width },
       completion: nil)
     UIView.animateWithDuration(0.5,
-      delay: 0.4,
+      delay: 1.4,
       options: [],
       animations: { self.loginButton.center.x += self.view.frame.width },
+      completion: nil)
+    UIView.animateWithDuration(0.5,
+      delay: 1.6,
+      options: [],
+      animations: { self.facebookLoginButton.center.x += self.view.frame.width },
+      completion: nil)
+    UIView.animateWithDuration(0.3,
+      delay: 1.8,
+      options: [],
+      animations: {
+        self.loginLabel.alpha = 1.0
+        self.signUpButton.alpha = 1.0
+      },
       completion: nil)
   }
   
@@ -84,17 +115,15 @@ class LoginViewController: UIViewController {
     // Login to Udacity and display student locations
     self.uClient.loginUdacity(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!) { error in
       
-      // Re-enable user to take actions regardless of login success or failure.
-      self.performUIUpdatesOnMain {
-        self.emailTextField.enabled = true
-        self.passwordTextField.enabled = true
-        self.signUpButton.enabled = true
-        self.toggleLoginButton()
-        self.activityIndicator.stopAnimating()
-      }
-      
       // Check for errors
       guard error == nil else {
+        self.performUIUpdatesOnMain {
+          self.emailTextField.enabled = true
+          self.passwordTextField.enabled = true
+          self.signUpButton.enabled = true
+          self.toggleLoginButton()
+          self.activityIndicator.stopAnimating()
+        }
         return self.alert(withTitle: "Login Error", message: error!.userInfo[NSLocalizedDescriptionKey] as! String)
       }
       
