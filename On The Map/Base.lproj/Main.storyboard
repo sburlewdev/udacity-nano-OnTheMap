@@ -27,6 +27,11 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="gJb-bR-WMt"/>
+                                    </mask>
+                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AtP-Pc-UTw">
                                 <rect key="frame" x="20" y="305" width="560" height="40"/>
@@ -225,14 +230,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IqM-eE-fZv">
-                                <rect key="frame" x="0.0" y="96" width="600" height="504"/>
+                                <rect key="frame" x="0.0" y="112" width="600" height="488"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USS-kq-yb2">
-                                <rect key="frame" x="500" y="20" width="80" height="30"/>
+                                <rect key="frame" x="490" y="20" width="90" height="36"/>
                                 <color key="backgroundColor" red="0.0" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="jU2-pv-QqS"/>
+                                    <constraint firstAttribute="width" constant="90" id="jU2-pv-QqS"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -241,17 +247,21 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where are you studying today?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="87S-hD-XG1">
-                                <rect key="frame" x="20" y="58" width="561" height="30"/>
+                                <rect key="frame" x="20" y="64" width="560" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8VQ-zm-pXw"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5d2-Ae-5xA">
-                                <rect key="frame" x="240" y="126" width="120" height="30"/>
+                                <rect key="frame" x="230" y="136" width="140" height="36"/>
                                 <color key="backgroundColor" red="0.0" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="Kk4-TJ-R2N"/>
+                                    <constraint firstAttribute="width" constant="140" id="Kk4-TJ-R2N"/>
                                 </constraints>
-                                <state key="normal" title="Find Location">
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Find On Map">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -276,7 +286,7 @@
                             <constraint firstItem="87S-hD-XG1" firstAttribute="centerX" secondItem="Qjn-HJ-RVC" secondAttribute="centerX" id="g5e-79-wJh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="87S-hD-XG1" secondAttribute="leading" id="hkd-dl-qqc"/>
                             <constraint firstItem="cL3-me-H2i" firstAttribute="centerX" secondItem="Qjn-HJ-RVC" secondAttribute="centerX" id="lk9-T4-V2M"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="87S-hD-XG1" secondAttribute="trailing" constant="-1" id="rtL-3l-ylM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="87S-hD-XG1" secondAttribute="trailing" id="rtL-3l-ylM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="87S-hD-XG1" secondAttribute="trailing" id="v1d-U8-mOq"/>
                             <constraint firstItem="cL3-me-H2i" firstAttribute="centerY" secondItem="Qjn-HJ-RVC" secondAttribute="centerY" id="wK5-5d-2uF"/>
                             <constraint firstItem="ufL-LA-D4X" firstAttribute="top" secondItem="IqM-eE-fZv" secondAttribute="bottom" id="x10-9n-62w"/>
