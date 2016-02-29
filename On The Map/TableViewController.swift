@@ -17,6 +17,10 @@ class TableViewController: UITableViewController {
   // Parse client
   let pClient = ParseClient.sharedInstance()
   
+  let parameters: JSON = [
+    "limit" : "100"
+  ]
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -37,7 +41,7 @@ class TableViewController: UITableViewController {
     let attributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
     self.refreshControl!.attributedTitle = NSAttributedString(string: "Last updated on \(NSDate())", attributes: attributes)
     
-    self.pClient.getStudentLocations { error in
+    self.pClient.getStudentLocations(withParameters: self.parameters) { error in
       
       self.tableView.reloadData()
       guard error == nil else {

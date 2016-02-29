@@ -21,6 +21,11 @@ class MapViewController: UIViewController {
   // Parse client
   let pClient = ParseClient.sharedInstance()
   
+  // Student location query parameters
+  let parameters: JSON = [
+    "limit" : "100"
+  ]
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.mapView.delegate = self
@@ -41,7 +46,7 @@ class MapViewController: UIViewController {
   }
   
   @IBAction func refresh(sender: AnyObject) {
-    pClient.getStudentLocations { error in
+    pClient.getStudentLocations(withParameters: self.parameters) { error in
       
       // Check for errors
       guard error == nil else {
