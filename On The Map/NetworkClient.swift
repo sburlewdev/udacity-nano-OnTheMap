@@ -20,11 +20,14 @@ private let session = NSURLSession.sharedSession()
 // Type Aliases
 // WARNING: The "typealias" keyword will be deprecated in Swift 2.2
 // https://github.com/apple/swift-evolution/blob/master/proposals/0011-replace-typealias-associated.md
-typealias JSONCompletionHandler = (data: NSData?, error: NSError?) -> Void
+typealias BasicCompletionHandler = (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void
+typealias JSONCompletionHandler = (data: NSData!, error: NSError?) -> Void
+typealias JSON = [String : AnyObject]
 
 // All networking clients should adopt this protocol
 protocol NetworkClient {
   func dataTask(request: NSURLRequest, errorDomain: String, jsonCompletionHandler: JSONCompletionHandler) -> NSURLSessionDataTask
+  func substituteParameters(forJSON json: JSON) -> String
 }
 
 // Provide implementation for all networking clients who adopt NetworkClient
@@ -32,7 +35,7 @@ extension NetworkClient {
 
   func dataTask(request: NSURLRequest, errorDomain: String, jsonCompletionHandler: JSONCompletionHandler) -> NSURLSessionDataTask {
     // Basic completion handler for all URL requests
-    let basicHandler: (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void = { data, response, error in
+    let basicHandler: BasicCompletionHandler = { data, response, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -57,6 +60,21 @@ extension NetworkClient {
     let task = session.dataTaskWithRequest(request, completionHandler: basicHandler)
     task.resume()
     return task
+  }
+  
+  func substituteParameters(forJSON json: JSON) -> String {
+    var paramString = "?"
+    for param in json {
+      if let value = param.1 as? String {
+        paramString += "\(param.0)=\(value)&"
+      }
+    }
+    if paramString == "?" {
+      return ""
+    } else {
+      // Remove "&" at end of string
+      return paramString.substringToIndex(paramString.endIndex.predecessor())
+    }
   }
 }
 
