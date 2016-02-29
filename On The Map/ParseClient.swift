@@ -64,10 +64,10 @@ class ParseClient {
 ////////////////////////////////////////////////////////////////////////////////
 extension ParseClient {
   
-  func getStudentLocations(completionHandler: (error: NSError?) -> Void) {
+  func getStudentLocations(withParameters parameters: JSON, completionHandler: (error: NSError?) -> Void) {
     
     // 1. Call level 2 method
-    self.getStudentLocations { locations, error in
+    self.getStudentLocations(withParameters: self.substituteParameters(forJSON: parameters)) { locations, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -86,7 +86,7 @@ extension ParseClient {
     }
   }
   
-  func createStudentLocation(newLocation: [String : AnyObject], completionHandler: (error: NSError?) -> Void) {
+  func createStudentLocation(newLocation: JSON, completionHandler: (error: NSError?) -> Void) {
     var json = "{\n"
     json += "  \"\(JSONResponseKeys.PUniqueKey)\": \"\(newLocation[JSONResponseKeys.PUniqueKey] as! String)\",\n"
     json += "  \"\(JSONResponseKeys.PFirstName)\": \"\(newLocation[JSONResponseKeys.PFirstName] as! String)\",\n"
@@ -123,11 +123,11 @@ extension ParseClient {
 ////////////////////////////////////////////////////////////////////////////////
 extension ParseClient {
   
-  private func getStudentLocations(completionHandler: (locations: [[String : AnyObject]]!, error: NSError?) -> Void) {
+  private func getStudentLocations(withParameters parameters: String, completionHandler: (locations: [JSON]!, error: NSError?) -> Void) {
     let domain = ErrorDomain.Parse + "getStudentLocations"
     
     // 1. Call level 1 method
-    self.get(ParseMethods.StudentLocation) { data, error in
+    self.get(method: ParseMethods.StudentLocation, parameters: parameters) { data, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -137,13 +137,13 @@ extension ParseClient {
       // 2. Construct JSON object from data
       let parsedResult: AnyObject!
       do {
-        parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+        parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
       } catch {
         return completionHandler(locations: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.ParseFailure))
       }
       
       // 3. Parse through JSON object
-      guard let locations = parsedResult[JSONResponseKeys.PResultsArray] as? [[String : AnyObject]] else {
+      guard let locations = parsedResult[JSONResponseKeys.PResultsArray] as? [JSON] else {
         return completionHandler(locations: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "results array"))
       }
       
@@ -152,11 +152,11 @@ extension ParseClient {
     }
   }
   
-  private func newStudentLocation(jsonBody: String, completionHandler: (newLocationInfo: [String : AnyObject]!, error: NSError?) -> Void) {
+  private func newStudentLocation(jsonBody: String, completionHandler: (newLocationInfo: JSON!, error: NSError?) -> Void) {
     let domain = ErrorDomain.Parse + "newStudentLocation"
     
     // 1. Call level 1 method
-    self.post(ParseMethods.StudentLocation, jsonBody: jsonBody) { data, error in
+    self.post(method: ParseMethods.StudentLocation, jsonBody: jsonBody) { data, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -172,13 +172,11 @@ extension ParseClient {
       }
       
       // 3. Parse through JSON object
-      guard let objectID = parsedResult[JSONResponseKeys.PObjectID] as? String else {
+      guard let objectID = (parsedResult as! JSON)[JSONResponseKeys.PObjectID] else {
         return completionHandler(newLocationInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "object ID"))
       }
       
-      let newLocationInfo : [String : AnyObject] = [
-        JSONResponseKeys.PObjectID : objectID
-      ]
+      let newLocationInfo : JSON = [ JSONResponseKeys.PObjectID : objectID ]
       
       // 4. Pass new location info up
       completionHandler(newLocationInfo: newLocationInfo, error: nil)
@@ -193,9 +191,9 @@ extension ParseClient {
 ////////////////////////////////////////////////////////////////////////////////
 extension ParseClient: NetworkClient {
   
-  private func get(method: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Parse + "get"
-    let url = NSURL(string: ParseClient.apiPath + method + "?limit=100")!
+  private func get(method method: String, parameters: String, jsonCompletionHandler: JSONCompletionHandler) {
+    let domain = ErrorDomain.Parse + HTTPMethods.Get
+    let url = NSURL(string: ParseClient.apiPath + method + parameters)!
     
     // 1. Create URL request
     let request = NSMutableURLRequest(URL: url)
@@ -206,8 +204,8 @@ extension ParseClient: NetworkClient {
     self.dataTask(request, errorDomain: domain, jsonCompletionHandler: jsonCompletionHandler)
   }
   
-  private func post(method: String, jsonBody: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Parse + "post"
+  private func post(method method: String, jsonBody: String, jsonCompletionHandler: JSONCompletionHandler) {
+    let domain = ErrorDomain.Parse + HTTPMethods.Post
     let url = NSURL(string: ParseClient.apiPath + method)!
     
     // 1. Create URL request
@@ -222,8 +220,8 @@ extension ParseClient: NetworkClient {
     self.dataTask(request, errorDomain: domain, jsonCompletionHandler: jsonCompletionHandler)
   }
   
-  private func put(method: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Parse + "put"
+  private func put(method method: String, jsonCompletionHandler: JSONCompletionHandler) {
+    let domain = ErrorDomain.Parse + HTTPMethods.Put
     let url = NSURL(string: ParseClient.apiPath + method)!
     
     // 1. Create URL request

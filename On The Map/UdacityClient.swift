@@ -139,7 +139,7 @@ extension UdacityClient {
     }
   }
   
-  private func getUserInfo(userKey: String, completionHandler: (userInfo: [String: AnyObject]!, error: NSError?) -> Void) {
+  private func getUserInfo(userKey: String, completionHandler: (userInfo: JSON!, error: NSError?) -> Void) {
     let domain = ErrorDomain.Udacity + "getUserInfo"
     
     // 1. Call level 1 method
@@ -150,12 +150,9 @@ extension UdacityClient {
         return completionHandler(userInfo: nil, error: error!)
       }
       
-      // Skip first 5 characters in conformance with Udacity API
-      guard let data = data?.subdataWithRange(NSRange.init(location: 5, length: (data?.length)! - 5)) else {
-        return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.InvalidData))
-      }
-      
       // 2. Construct JSON object from data
+      // Skip first 5 characters as required by Udacity API
+      let data = data.subdataWithRange(NSRange.init(location: 5, length: (data.length) - 5))
       let parsedResult: AnyObject!
       do {
         parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
@@ -165,26 +162,26 @@ extension UdacityClient {
       
       // 3. Parse through JSON object
       // Get user dictionary
-      guard let user = parsedResult[JSONResponseKeys.UUserDict] as? [String : AnyObject] else {
+      guard let user = parsedResult[JSONResponseKeys.UUserDict] as? JSON else {
         return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "user dictionary"))
       }
       
       // Get first name
-      guard let firstName = user[JSONResponseKeys.UFirstName] as? String else {
+      guard let firstName = user[JSONResponseKeys.UFirstName] else {
         return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "first name"))
       }
       
       // Get last name
-      guard let lastName = user[JSONResponseKeys.ULastName] as? String else {
+      guard let lastName = user[JSONResponseKeys.ULastName] else {
         return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "last name"))
       }
       
       // Get facebook ID
-      guard let facebookID = user[JSONResponseKeys.UFacebookID] as? String else {
+      guard let facebookID = user[JSONResponseKeys.UFacebookID] else {
         return completionHandler(userInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "Facebook ID"))
       }
       
-      let userInfo : [String : AnyObject] = [
+      let userInfo: JSON = [
         JSONResponseKeys.UFacebookID : facebookID,
         JSONResponseKeys.UFirstName : firstName,
         JSONResponseKeys.ULastName : lastName
@@ -195,7 +192,7 @@ extension UdacityClient {
     }
   }
   
-  private func authenticateSession(jsonBody: String, completionHandler: (sessionInfo: [String : AnyObject]!, error: NSError?) -> Void) {
+  private func authenticateSession(jsonBody: String, completionHandler: (sessionInfo: JSON!, error: NSError?) -> Void) {
     let domain = ErrorDomain.Udacity + "authenticateSession"
     
     // 1. Call level 1 method
@@ -205,13 +202,10 @@ extension UdacityClient {
       guard error == nil else {
         return completionHandler(sessionInfo: nil, error: error!)
       }
-      
-      // Skip first 5 characters in conformance with Udacity API
-      guard let data = data?.subdataWithRange(NSRange.init(location: 5, length: (data?.length)! - 5)) else {
-        return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.InvalidData))
-      }
-      
+
       // 2. Construct JSON object from data
+      // Skip first 5 characters as required by Udacity API
+      let data = data.subdataWithRange(NSRange.init(location: 5, length: (data.length) - 5))
       let parsedResult: AnyObject!
       do {
         parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
@@ -221,31 +215,31 @@ extension UdacityClient {
       
       // 3. Parse through JSON object
       // Get account dictionary
-      guard let jsonAccount = parsedResult[JSONResponseKeys.UAccountDict] as? [ String: AnyObject] else {
+      guard let jsonAccount = parsedResult[JSONResponseKeys.UAccountDict] as? JSON else {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "user account dictionary"))
       }
       
       // Get user ID
-      guard let userKey = jsonAccount[JSONResponseKeys.UUserKey] as? String else {
-        return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "user ID"))
+      guard let userKey = jsonAccount[JSONResponseKeys.UUserKey] else {
+        return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "user key"))
       }
       
       // Get session dictionary
-      guard let jsonSession = parsedResult[JSONResponseKeys.USessionDict] as? [String : AnyObject] else {
+      guard let jsonSession = parsedResult[JSONResponseKeys.USessionDict] as? JSON else {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "session dictionary"))
       }
       
       // Get session ID
-      guard let sessionID = jsonSession[JSONResponseKeys.USessionID] as? String else {
+      guard let sessionID = jsonSession[JSONResponseKeys.USessionID] else {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "session ID"))
       }
       
       // Get session expiration
-      guard let sessionExpiration = jsonSession[JSONResponseKeys.USessionExpiration] as? String else {
+      guard let sessionExpiration = jsonSession[JSONResponseKeys.USessionExpiration] else {
         return completionHandler(sessionInfo: nil, error: NSError.getError(withDomain: domain, message: ErrorMessageKeys.FindFailure + "session expiration"))
       }
       
-      let sessionInfo: [String : AnyObject] = [
+      let sessionInfo: JSON = [
         JSONResponseKeys.USessionID : sessionID,
         JSONResponseKeys.USessionExpiration : sessionExpiration,
         JSONResponseKeys.UUserKey : userKey
