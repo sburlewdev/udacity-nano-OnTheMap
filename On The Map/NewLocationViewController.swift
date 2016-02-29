@@ -20,7 +20,7 @@ class NewLocationViewController : UIViewController {
   
   private let pClient = ParseClient.sharedInstance()
   
-  private var location = [String : AnyObject]()
+  private var location = JSON()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,33 +55,41 @@ class NewLocationViewController : UIViewController {
   @IBAction func findOnMap(sender: AnyObject) {
     self.locationLinkTextField.resignFirstResponder()
     
-    guard self.findSubmitButton.titleLabel?.text == "Find Location" else {
+    guard self.findSubmitButton.titleLabel?.text == "Find On Map" else {
       return
     }
-      self.cancelButton.enabled = false
-      self.activityIndicator.startAnimating()
-      
-      // Populate location
-      self.location[JSONResponseKeys.PMapString] = self.locationLinkTextField.text!
-      
-      // Forward-geocode string to get lat/lon coordinates
-      CLGeocoder().geocodeAddressString(self.locationLinkTextField.text!) { placemarks, error in
+    self.toggleButtons(false)
+    self.activityIndicator.startAnimating()
+    
+    // Populate location
+    self.location[JSONResponseKeys.PMapString] = self.locationLinkTextField.text!
+    
+    // Forward-geocode string to get lat/lon coordinates
+    CLGeocoder().geocodeAddressString(self.locationLinkTextField.text!) { placemarks, error in
         
       // Check for errors
       guard error == nil else {
-        return self.alert(withTitle: "New Location Error", message: error!.userInfo[NSLocalizedDescriptionKey] as! String)
+        self.toggleButtons(true)
+        self.activityIndicator.stopAnimating()
+        return self.alert(withTitle: "New Location Error", message: error!.userInfo[NSLocalizedDescriptionKey] as? String ?? ErrorMessageKeys.Unknown)
       }
       
       // Validate data
       guard let coordinates = placemarks?.first?.location?.coordinate else {
+        self.toggleButtons(true)
+        self.activityIndicator.stopAnimating()
         return self.alert(withTitle: "New Location Error", message: ErrorMessageKeys.FindFailure + "coordinates")
       }
       
       guard coordinates.latitude.isZero == false else {
+        self.toggleButtons(true)
+        self.activityIndicator.stopAnimating()
         return self.alert(withTitle: "New Location Error", message: "Latitude cannot be zero")
       }
       
       guard coordinates.longitude.isZero == false else {
+        self.toggleButtons(true)
+        self.activityIndicator.stopAnimating()
         return self.alert(withTitle: "New Location Error", message: "Longitude cannot be zero")
       }
         
