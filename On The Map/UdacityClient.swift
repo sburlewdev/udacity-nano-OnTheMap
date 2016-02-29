@@ -120,7 +120,7 @@ extension UdacityClient {
   private func deleteSession(completionHandler: (error: NSError?) -> Void) {
     
     // Delete session ID and log out.
-    self.requestDELETE(UdacityMethods.Session) { data, error in
+    self.delete(UdacityMethods.Session) { data, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -143,7 +143,7 @@ extension UdacityClient {
     let domain = ErrorDomain.Udacity + "getUserInfo"
     
     // 1. Call level 1 method
-    self.requestGET(UdacityMethods.User + userKey) { data, error in
+    self.get(UdacityMethods.User + userKey) { data, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -199,7 +199,7 @@ extension UdacityClient {
     let domain = ErrorDomain.Udacity + "authenticateSession"
     
     // 1. Call level 1 method
-    self.requestPOST(UdacityMethods.Session, jsonBody: jsonBody) { data, error in
+    self.post(UdacityMethods.Session, jsonBody: jsonBody) { data, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -264,8 +264,8 @@ extension UdacityClient {
 ////////////////////////////////////////////////////////////////////////////////
 extension UdacityClient: NetworkClient {
   
-  private func requestDELETE(method: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Udacity + "requestDELETE"
+  private func delete(method: String, jsonCompletionHandler: JSONCompletionHandler) {
+    let domain = ErrorDomain.Udacity + "delete"
     let url = NSURL(string: UdacityClient.apiPath + method)!
     
     // 1. Create URL request
@@ -286,8 +286,8 @@ extension UdacityClient: NetworkClient {
     self.dataTask(request, errorDomain: domain, jsonCompletionHandler: jsonCompletionHandler)
   }
   
-  private func requestGET(method: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Udacity + "requestGET"
+  private func get(method: String, jsonCompletionHandler: JSONCompletionHandler) {
+    let domain = ErrorDomain.Udacity + "get"
     let url = NSURL(string: UdacityClient.apiPath + method)!
     
     // 1. Create URL request
@@ -297,8 +297,8 @@ extension UdacityClient: NetworkClient {
     self.dataTask(request, errorDomain: domain, jsonCompletionHandler: jsonCompletionHandler)
   }
   
-  private func requestPOST(method: String, jsonBody: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Udacity + "requestPOST"
+  private func post(method: String, jsonBody: String, jsonCompletionHandler: JSONCompletionHandler) {
+    let domain = ErrorDomain.Udacity + "post"
     let url = NSURL(string: UdacityClient.apiPath + method)!
     
     // 1. Create URL request

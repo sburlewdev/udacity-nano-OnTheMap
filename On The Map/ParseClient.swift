@@ -127,7 +127,7 @@ extension ParseClient {
     let domain = ErrorDomain.Parse + "getStudentLocations"
     
     // 1. Call level 1 method
-    self.requestGET(ParseMethods.StudentLocation) { data, error in
+    self.get(ParseMethods.StudentLocation) { data, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -156,7 +156,7 @@ extension ParseClient {
     let domain = ErrorDomain.Parse + "newStudentLocation"
     
     // 1. Call level 1 method
-    requestPOST(ParseMethods.StudentLocation, jsonBody: jsonBody) { data, error in
+    self.post(ParseMethods.StudentLocation, jsonBody: jsonBody) { data, error in
       
       // 1. Check for errors
       guard error == nil else {
@@ -193,8 +193,8 @@ extension ParseClient {
 ////////////////////////////////////////////////////////////////////////////////
 extension ParseClient: NetworkClient {
   
-  private func requestGET(method: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Parse + "requestGET"
+  private func get(method: String, jsonCompletionHandler: JSONCompletionHandler) {
+    let domain = ErrorDomain.Parse + "get"
     let url = NSURL(string: ParseClient.apiPath + method + "?limit=100")!
     
     // 1. Create URL request
@@ -206,8 +206,8 @@ extension ParseClient: NetworkClient {
     self.dataTask(request, errorDomain: domain, jsonCompletionHandler: jsonCompletionHandler)
   }
   
-  private func requestPOST(method: String, jsonBody: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Parse + "requestPOST"
+  private func post(method: String, jsonBody: String, jsonCompletionHandler: JSONCompletionHandler) {
+    let domain = ErrorDomain.Parse + "post"
     let url = NSURL(string: ParseClient.apiPath + method)!
     
     // 1. Create URL request
@@ -222,8 +222,8 @@ extension ParseClient: NetworkClient {
     self.dataTask(request, errorDomain: domain, jsonCompletionHandler: jsonCompletionHandler)
   }
   
-  private func requestPUT(method: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Parse + "requestPUT"
+  private func put(method: String, jsonCompletionHandler: JSONCompletionHandler) {
+    let domain = ErrorDomain.Parse + "put"
     let url = NSURL(string: ParseClient.apiPath + method)!
     
     // 1. Create URL request
