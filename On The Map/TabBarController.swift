@@ -15,6 +15,7 @@ class TabBarController: UITabBarController {
     
     self.setStyling()
     
+    // Only animate when app transitions from login screen
     if NSUserDefaults.standardUserDefaults().boolForKey("AlreadyAnimatedTabBar") == false {
       NSUserDefaults.standardUserDefaults().setBool(true, forKey: "AlreadyAnimatedTabBar")
       
