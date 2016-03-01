@@ -67,7 +67,7 @@ extension ParseClient {
   func getStudentLocations(withParameters parameters: JSON, completionHandler: (error: NSError?) -> Void) {
     
     // 1. Call level 2 method
-    self.getStudentLocations(withParameters: self.substituteParameters(forJSON: parameters)) { locations, error in
+    self.getStudentLocations(withParameters: self.substituteParameters(parameters)) { locations, error in
       
       // 1. Check for errors
       guard error == nil else {

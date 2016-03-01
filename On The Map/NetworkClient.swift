@@ -27,7 +27,7 @@ typealias JSON = [String : AnyObject]
 // All networking clients should adopt this protocol
 protocol NetworkClient {
   func dataTask(request: NSURLRequest, errorDomain: String, jsonCompletionHandler: JSONCompletionHandler) -> NSURLSessionDataTask
-  func substituteParameters(forJSON json: JSON) -> String
+  func substituteParameters(parameters: JSON) -> String
 }
 
 // Provide implementation for all networking clients who adopt NetworkClient
@@ -62,19 +62,14 @@ extension NetworkClient {
     return task
   }
   
-  func substituteParameters(forJSON json: JSON) -> String {
-    var paramString = "?"
-    for param in json {
-      if let value = param.1 as? String {
-        paramString += "\(param.0)=\(value)&"
-      }
-    }
-    if paramString == "?" {
+  func substituteParameters(parameters: JSON) -> String
+  {
+    if parameters.isEmpty {
       return ""
-    } else {
-      // Remove "&" at end of string
-      return paramString.substringToIndex(paramString.endIndex.predecessor())
     }
+    return parameters.map {
+      return $0.0 + "=" + "\($0.1)".stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
+    }.joinWithSeparator("&")
   }
 }
 
