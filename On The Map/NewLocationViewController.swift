@@ -31,7 +31,7 @@ class NewLocationViewController : UIViewController {
     self.mapView.alpha = 0.2
     
     self.locationLinkTextField.layer.cornerRadius = self.locationLinkTextField.frame.height / 2.0
-    self.locationLinkTextField.addTarget(self, action: "toggleFindSubmitButton", forControlEvents: .EditingChanged)
+    self.locationLinkTextField.addTarget(self, action: #selector(NewLocationViewController.toggleFindSubmitButton), forControlEvents: .EditingChanged)
     
     self.cancelButton.layer.cornerRadius = self.cancelButton.frame.height / 2.0
     self.findSubmitButton.layer.cornerRadius = self.findSubmitButton.frame.height / 2.0

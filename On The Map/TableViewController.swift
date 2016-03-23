@@ -26,7 +26,7 @@ class TableViewController: UITableViewController {
     
     self.edgesForExtendedLayout = .None
     
-    self.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+    self.refreshControl!.addTarget(self, action: #selector(TableViewController.refresh(_:)), forControlEvents: .ValueChanged)
     self.refreshControl!.backgroundColor = .whiteColor()
     let attributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
     self.refreshControl!.attributedTitle = NSAttributedString(string: "Last updated on \(NSDate())", attributes: attributes)

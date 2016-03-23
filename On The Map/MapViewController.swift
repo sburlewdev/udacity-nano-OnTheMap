@@ -87,16 +87,24 @@ extension MapViewController: MKMapViewDelegate {
   }
   
   func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-    let identifier = "pin"
-    var view: MKPinAnnotationView
-    if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
-      view = dequeuedView
-    } else {
-      view = MKPinAnnotationView(annotation: nil, reuseIdentifier: identifier)
-      view.canShowCallout = true
-      view.calloutOffset = CGPoint(x: -5, y: 5)
-      view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+    if annotation is MKUserLocation {
+      return nil
     }
-    return view
+    
+    let identifier = "pin"
+    var view = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+    
+    if view == nil {
+      view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+    } else {
+      view!.annotation = annotation
+    }
+
+    view!.image = UIImage(named: "marker")
+    view!.canShowCallout = true
+    view!.calloutOffset = CGPoint(x: -5, y: 5)
+    view!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+    
+    return view!
   }
 }
