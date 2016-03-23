@@ -20,13 +20,17 @@ extension UIViewController {
   }
   
   func displayURLInSafari(urlString: String) {
-    // Check that url is properly formatted and uses the http or https scheme.
-    guard let url = NSURL(string: urlString) where url.scheme == "http" || url.scheme == "https" else {
-      return self.alert(withTitle: "URL Error", message: "The link you selected is not a valid URL, or does not use HTTP or HTTPS.")
+    // Check that url is properly formatted and uses http or https
+    guard let url = NSURL(string: urlString) else {
+      return self.alert(withTitle: "URL Error", message: "The link you selected is not a valid URL.")
     }
     
-    let safari = SFSafariViewController(URL: url)
-    self.presentViewController(safari, animated: true, completion: nil)
+    if url.scheme == "http" || url.scheme == "https" {
+      let safari = SFSafariViewController(URL: url)
+      self.presentViewController(safari, animated: true, completion: nil)
+    } else {
+      UIApplication.sharedApplication().openURL(url)
+    }
   }
   
   func logout() {
@@ -37,9 +41,10 @@ extension UIViewController {
       guard error == nil else {
         return self.alert(withTitle: "Logout Error", message: error!.userInfo[NSLocalizedDescriptionKey] as! String)
       }
+      
+      // Dismiss tab bar controller and return to login screen
+      self.tabBarController!.dismissViewControllerAnimated(true, completion: nil)
     }
-    // Dismiss tab bar controller and return to login view
-    self.tabBarController!.dismissViewControllerAnimated(true, completion: nil)
   }
   
   func performUIUpdatesOnMain(updates: () -> Void) {
