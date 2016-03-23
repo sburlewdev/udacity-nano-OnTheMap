@@ -25,28 +25,42 @@ class UdacityClient {
     self.sessionExpiration = nil
     self.facebookID = nil
   }
+  
+  func loginFacebook(withAccessToken token: String, completionHandler: (error: NSError?) -> Void) {
+    var facebookJSON = "{\n"
+    facebookJSON += "  \"facebook_mobile\": {\n"
+    facebookJSON += "    \"access_token\": \"\(token)\"\n"
+    facebookJSON += "  }\n"
+    facebookJSON += "}"
+    
+    self.login(facebookJSON, completionHandler: completionHandler)
+  }
+  
+  func loginUdacity(withEmail email: String, password: String, completionHandler: (error: NSError?) -> Void) {
+    
+    // Construct JSON object for authenticating session
+    var udacityJSON = "{\n"
+    udacityJSON += "  \"udacity\": {\n"
+    udacityJSON += "    \"username\": \"\(email)\",\n"
+    udacityJSON += "    \"password\": \"\(password)\"\n"
+    udacityJSON += "  }\n"
+    udacityJSON += "}"
+    
+    self.login(udacityJSON, completionHandler: completionHandler)
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // NETWORKING LEVEL 3 - INTERFACE METHODS
 // 1. Call level 2 method with completion handler:
-//   1. Check for errors from level 2
-//   2. Handle data from level 2
+//   1. Check for errors
+//   2. Handle data
 //   3. Call external completion handler
 ////////////////////////////////////////////////////////////////////////////////
 extension UdacityClient {
   
-  func loginUdacity(withEmail email: String, password: String, completionHandler: (error: NSError?) -> Void) {
-    
-    // Construct JSON object for authenticating session
-    var jsonBody = "{\n"
-    jsonBody += "  \"udacity\": {\n"
-    jsonBody += "    \"username\": \"\(email)\",\n"
-    jsonBody += "    \"password\": \"\(password)\"\n"
-    jsonBody += "  }\n"
-    jsonBody += "}"
-    
-    // 1. Call level 2 method
+  private func login(jsonBody: String, completionHandler: (error: NSError?) -> Void) {
+    // 1. Authenticate session
     self.authenticateSession(jsonBody) { sessionInfo, error in
       
       // 1. Check for errors
@@ -75,7 +89,13 @@ extension UdacityClient {
         self.facebookID = (userInfo[JSONResponseKeys.UFacebookID] as! String)
         
         // Set user info for Parse client
-        ParseClient.sharedInstance().setUserInfo(self.sessionID, userID: userKey, firstName: firstName, lastName: lastName)
+        let userInfo: JSON = [
+          JSONResponseKeys.USessionID : self.sessionID,
+          JSONResponseKeys.UUserKey : userKey,
+          JSONResponseKeys.UFirstName : firstName,
+          JSONResponseKeys.ULastName : lastName
+        ]
+        ParseClient.sharedInstance().setUserInfo(userInfo)
         
         // 3. Call external completion handler
         completionHandler(error: nil)
@@ -259,7 +279,7 @@ extension UdacityClient {
 extension UdacityClient: NetworkClient {
   
   private func delete(method: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Udacity + "delete"
+    let domain = ErrorDomain.Udacity + HTTPMethods.Delete
     let url = NSURL(string: UdacityClient.apiPath + method)!
     
     // 1. Create URL request
@@ -281,7 +301,7 @@ extension UdacityClient: NetworkClient {
   }
   
   private func get(method: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Udacity + "get"
+    let domain = ErrorDomain.Udacity + HTTPMethods.Get
     let url = NSURL(string: UdacityClient.apiPath + method)!
     
     // 1. Create URL request
@@ -292,7 +312,7 @@ extension UdacityClient: NetworkClient {
   }
   
   private func post(method: String, jsonBody: String, jsonCompletionHandler: JSONCompletionHandler) {
-    let domain = ErrorDomain.Udacity + "post"
+    let domain = ErrorDomain.Udacity + HTTPMethods.Post
     let url = NSURL(string: UdacityClient.apiPath + method)!
     
     // 1. Create URL request

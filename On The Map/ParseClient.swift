@@ -33,11 +33,12 @@ class ParseClient {
   // Student location data for display
   private (set) var studentLocations = [StudentInformation]()
   
-  func setUserInfo(sessionID: String, userID: String?, firstName: String?, lastName: String?) {
-    self.sessionID = sessionID
-    self.userID = userID
-    self.firstName = firstName
-    self.lastName = lastName
+  func setUserInfo(userInfo: JSON) {
+    
+    self.sessionID = userInfo[JSONResponseKeys.USessionID] as! String
+    self.userID = userInfo[JSONResponseKeys.UUserKey] as! String
+    self.firstName = userInfo[JSONResponseKeys.UFirstName] as! String
+    self.lastName = userInfo[JSONResponseKeys.ULastName] as! String
   }
   
   func reset(sessionID: String) -> Bool {

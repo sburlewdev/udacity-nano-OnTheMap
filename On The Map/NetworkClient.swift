@@ -17,9 +17,6 @@ import Foundation
 
 private let session = NSURLSession.sharedSession()
 
-// Type Aliases
-// WARNING: The "typealias" keyword will be deprecated in Swift 2.2
-// https://github.com/apple/swift-evolution/blob/master/proposals/0011-replace-typealias-associated.md
 typealias BasicCompletionHandler = (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void
 typealias JSONCompletionHandler = (data: NSData!, error: NSError?) -> Void
 typealias JSON = [String : AnyObject]
@@ -75,7 +72,7 @@ extension NetworkClient {
     if parameters.isEmpty {
       return ""
     }
-    return parameters.map {
+    return "?" + parameters.map {
       return $0.0 + "=" + "\($0.1)".stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
     }.joinWithSeparator("&")
   }
