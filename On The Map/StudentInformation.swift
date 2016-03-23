@@ -54,6 +54,6 @@ extension NSDate {
   }
   
   class func dateFromString(string: String) -> NSDate {
-    return NSDate.dateFormatter().dateFromString(string)!
+    return NSDate.dateFormatter().dateFromString(string) ?? NSDate()
   }
 }
